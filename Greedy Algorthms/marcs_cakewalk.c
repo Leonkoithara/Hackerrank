@@ -1,7 +1,7 @@
 // Marc likes to eat Cakes but he also cares aboutt his health.
 
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 
 int pow(int base,int exponent)
 {
@@ -15,7 +15,8 @@ int pow(int base,int exponent)
 }
 
 
-long int marcsCakewalk(int calorie_size, int* calorie) {
+long int marcsCakewalk(int calorie_size, int* calorie) 
+{
     double dist=0;
     int i=0;
     while(i<(calorie_size-1))
@@ -33,14 +34,14 @@ long int marcsCakewalk(int calorie_size, int* calorie) {
     return(dist); 
 }
 
-
-
-int main() {
+int main() 
+{
     int n; 
     scanf("%i", &n);
     int *calorie = malloc(sizeof(int) * n);
     
-    for (int calorie_i = 0; calorie_i < n; calorie_i++) {
+    for (int calorie_i = 0; calorie_i < n; calorie_i++) 
+	{
        scanf("%i",&calorie[calorie_i]);
     }
 

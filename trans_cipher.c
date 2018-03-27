@@ -1,3 +1,6 @@
+/*This is known as the translocation cipher*/
+
+
 #include <stdio.h>
 #include <string.h>
 
