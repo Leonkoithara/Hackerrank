@@ -9,6 +9,28 @@ vector<string> split(const string &);
 // Complete the dynamicArray function below.
 vector<int> dynamicArray(int n, vector<vector<int>> queries) 
 {
+	int lastanswer = 0, index;
+	vector<int> answer;
+	vector<int> *seq;
+	vector<vector<int>> seqlist(n);
+
+	for(unsigned int i=0;i < queries.size();i++)
+	{
+		index = (queries[i][1]^lastanswer)%n;
+		seq = &seqlist[index];
+
+		if(queries[i][0] == 1)
+		{
+			seq->push_back(queries[i][2]);
+		}
+		else
+		{
+			lastanswer = seq->at(queries[i][2]%seq->size());
+			answer.push_back(lastanswer);
+		}
+	}
+
+	return answer;
 }
 
 int main() {
