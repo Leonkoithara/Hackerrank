@@ -2,17 +2,17 @@
 
 using namespace std;
 
-char* mul_strs(char *n1, char *n2)
+void mul_strs(char *n1, char *n2)
 {
     int i, j;
     
     int l1 = strlen(n1), l2=strlen(n2);
     int lx = l1>l2?l1:l2;
     int ly = l1>l2?l2:l1;
-    char *res = (char*)malloc((l1+l2)*sizeof(char));
+    //char *res = (char*)malloc((l1+l2)*sizeof(char));
     int computemat[ly][l1+l2];
     bzero(computemat, ly*(l1+l2)*sizeof(int));
-    bzero(res, (l1+l2)*sizeof(int));
+    //bzero(res, (l1+l2)*sizeof(int));
     char *nl = l1>l2?n1:n2;
     char *ns = l1>l2?n2:n1;
 
@@ -30,28 +30,29 @@ char* mul_strs(char *n1, char *n2)
     }
 
     prev=0;
+    n1 = (char*)realloc((void*)n1, (l1+l2+2)*sizeof(char));
+    bzero(n1, (l1+l2)*sizeof(char));
     for(i=0;i<l1+l2;i++)
     {
 	for(j=0;j<ly;j++)
 	{
-	    res[i] += (computemat[j][i]);
+	    n1[i] += (computemat[j][i]);
 	}
-	res[i] += prev;
-	prev = res[i]/10;
-	res[i] = res[i]%10+48;
+	n1[i] += prev;
+	prev = n1[i]/10;
+	n1[i] = n1[i]%10+48;
     }
-    res[i] = prev+48;
-    res[i+1] = '\0';
+    n1[i] = prev+48;
+    n1[i+1] = '\0';
 
-    for(i=0;i<strlen(res)/2;i++)
+    for(i=0;i<strlen(n1)/2;i++)
     {
-	char temp=res[i];
-	res[i]=res[strlen(res)-i-1];
-	res[strlen(res)-i-1]=temp;
+	char temp=n1[i];
+	n1[i]=n1[strlen(n1)-i-1];
+	n1[strlen(n1)-i-1]=temp;
     }
 
-    free(n1);
-    return res;
+    //return res;
 }
 
 void extraLongFactorials(int n)
@@ -71,11 +72,18 @@ void extraLongFactorials(int n)
     while(t)
     {
 	sprintf(n1, "%d", t);
-	res = mul_strs(res, n1);
+	mul_strs(res, n1);
 	t--;
     }
 
-    cout << res;
+    int i;
+    for(i=0;i<strlen(res);i++)
+    {
+	if(res[i] != '0')
+	    break;
+    }
+    for(;i<strlen(res);i++)
+	cout << res[i];
 }
 
 int main()
