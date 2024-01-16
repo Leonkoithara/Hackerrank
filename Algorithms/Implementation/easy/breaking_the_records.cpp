@@ -16,14 +16,23 @@ vector<string> split(const string &);
 vector<int> breakingRecords(vector<int> scores)
 {
     vector<int> output = {0, 0};
-    #define MIN 0
-    #define MAX 1
+    #define MIN 1
+    #define MAX 0
     int min = scores.front();
-    int max = 0;
+    int max = scores.front();
 
     for (auto i=scores.begin(); i!=scores.end(); i++)
 	{
-        
+        if (*i < min)
+        {
+            output[MIN]++;
+            min = *i;
+        }
+        if (*i > max)
+		{
+            output[MAX]++;
+            max = *i;
+        }
     }
 
     return output;
